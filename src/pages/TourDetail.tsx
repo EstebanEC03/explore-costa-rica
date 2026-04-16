@@ -125,10 +125,6 @@ export default function TourDetail() {
                     <span className="text-on-surface-variant text-sm">USD</span>
                   </div>
                 </div>
-                <div className="bg-tertiary-container text-on-tertiary-container text-xs px-4 py-2 rounded-full inline-flex items-center gap-2 font-medium">
-                  <span className="w-2 h-2 rounded-full bg-tertiary-fixed animate-pulse"></span>
-                  Likely to sell out
-                </div>
               </div>
 
               <div className="flex flex-col gap-4">

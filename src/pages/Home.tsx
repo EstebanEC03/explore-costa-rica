@@ -52,9 +52,6 @@ export default function Home() {
           </div>
           <div className="relative z-10 w-full max-w-7xl mx-auto px-8 md:px-12">
             <div className="max-w-2xl">
-              <span className="inline-block px-4 py-1.5 mb-6 bg-tertiary-container text-tertiary-fixed-dim text-xs font-bold uppercase tracking-[0.2em] rounded-full">
-                Authentic Experiences
-              </span>
               <h1 className="text-6xl md:text-8xl font-extrabold text-white leading-[1.05] tracking-tight mb-8 font-headline">
                 Discover the <br /><span className="text-tertiary-fixed">Pura Vida</span>
               </h1>
@@ -65,9 +62,6 @@ export default function Home() {
                 <Link to="/tours" className="px-8 py-4 bg-white text-primary text-sm font-bold rounded-full shadow-xl hover:bg-surface-container-lowest transition-all">
                   Explore Tours
                 </Link>
-                <button className="px-8 py-4 bg-primary/20 backdrop-blur-md border border-white/20 text-white text-sm font-bold rounded-full hover:bg-white/10 transition-all">
-                  Start Your Journey
-                </button>
               </div>
             </div>
           </div>
@@ -120,11 +114,6 @@ export default function Home() {
               <Link to={`/tours/${tour.id}`} key={tour.id} className="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.04)] hover:shadow-xl transition-all duration-500">
                 <div className="h-64 relative overflow-hidden">
                   <img alt={tour.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src={tour.imageUrl} />
-                  {tour.badge && (
-                    <div className="absolute top-4 left-4 bg-white/80 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold uppercase text-primary tracking-wider">
-                      {tour.badge}
-                    </div>
-                  )}
                 </div>
                 <div className="p-6">
                   <div className="flex items-center gap-2 mb-3">
@@ -145,33 +134,6 @@ export default function Home() {
                 </div>
               </Link>
             ))}
-          </div>
-        </section>
-
-        {/* Newsletter */}
-        <section className="py-24 bg-white px-8">
-          <div className="max-w-5xl mx-auto rounded-[2rem] bg-primary-container p-12 md:p-20 relative overflow-hidden text-center">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-tertiary-container/50 to-transparent"></div>
-            <div className="relative z-10 flex flex-col items-center">
-              <div className="inline-flex items-center gap-3 bg-tertiary-container px-4 py-2 rounded-full mb-8">
-                <div className="w-2 h-2 bg-tertiary-fixed rounded-full animate-pulse"></div>
-                <span className="text-[11px] font-bold text-tertiary-fixed uppercase tracking-widest">Experience Pulse: 14 groups on trail right now</span>
-              </div>
-              <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-6 font-headline">Stay Connected to the Wild</h2>
-              <p className="text-on-primary-container text-lg max-w-xl mb-12">
-                Receive seasonal travel guides, wildlife migration alerts, and exclusive early access to our boutique tour launches.
-              </p>
-              <form className="w-full max-w-md flex flex-col md:flex-row gap-4" onSubmit={(e) => e.preventDefault()}>
-                <input
-                  className="flex-1 px-8 py-4 bg-white/10 border border-white/20 rounded-full text-white placeholder:text-white/40 focus:outline-none focus:bg-white/20 transition-all"
-                  placeholder="Your email address"
-                  type="email"
-                />
-                <button className="px-8 py-4 bg-white text-primary font-bold rounded-full shadow-lg hover:scale-95 transition-transform" type="submit">
-                  Subscribe
-                </button>
-              </form>
-            </div>
           </div>
         </section>
       </main>

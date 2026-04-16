@@ -104,15 +104,6 @@ export default function Login() {
           <a className="text-[10px] uppercase tracking-widest font-bold text-on-primary/60 hover:text-on-primary transition-colors" href="#">Terms of Service</a>
         </footer>
       </main>
-
-      {/* Experience Pulse */}
-      <div className="absolute bottom-8 right-8 hidden md:flex items-center gap-3 bg-surface-container-lowest/80 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 shadow-sm">
-        <div className="relative flex h-2 w-2">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary-fixed opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-tertiary-container"></span>
-        </div>
-        <span className="text-[10px] font-bold tracking-widest uppercase text-tertiary">Real-time Travel Updates Active</span>
-      </div>
     </div>
   );
 }

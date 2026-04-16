@@ -154,10 +154,6 @@ export default function ToursList() {
               <span className="material-symbols-outlined">chevron_right</span>
             </button>
           </div>
-          <button className="mt-12 group flex items-center gap-3 bg-surface-container-high px-8 py-4 rounded-full font-bold text-primary hover:bg-surface-container-highest transition-all duration-300">
-            Load More Experiences
-            <span className="material-symbols-outlined group-hover:translate-y-1 transition-transform">expand_more</span>
-          </button>
         </div>
       </main>
       <Footer />

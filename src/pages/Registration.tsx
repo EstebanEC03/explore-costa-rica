@@ -101,7 +101,7 @@ export default function Registration() {
                 Register
               </button>
               <div className="text-center">
-                <Link className="text-secondary font-semibold hover:underline transition-all text-sm" to="/login">Back to Login</Link>
+                <Link className="text-secondary font-semibold hover:underline transition-all text-sm" to="/login">Already have an account? Sign In</Link>
               </div>
             </div>
           </form>
