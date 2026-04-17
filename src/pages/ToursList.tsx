@@ -116,7 +116,7 @@ export default function ToursList() {
                     <p className="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold">Starting at</p>
                     <p className="text-xl font-extrabold text-primary">${tour.price.toFixed(2)}</p>
                   </div>
-                  <span className="bg-primary text-white p-3 rounded-full group-hover:bg-primary-container transition-colors">
+                  <span className="bg-primary text-on-primary p-3 rounded-full group-hover:bg-primary-container transition-colors">
                     <span className="material-symbols-outlined">arrow_forward</span>
                   </span>
                 </div>

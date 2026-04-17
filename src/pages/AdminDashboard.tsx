@@ -67,7 +67,7 @@ export default function AdminDashboard() {
                 <p className="text-sm text-on-surface-variant">Last 30 days performance</p>
               </div>
               <div className="flex gap-2">
-                <button className="px-3 py-1 text-xs font-semibold bg-primary text-white rounded-full">Bookings</button>
+                <button className="px-3 py-1 text-xs font-semibold bg-primary text-on-primary rounded-full">Bookings</button>
                 <button className="px-3 py-1 text-xs font-semibold text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors">Views</button>
               </div>
             </div>
@@ -119,14 +119,14 @@ export default function AdminDashboard() {
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMVQX23jheNi23AnKcW6kKEdxWcKCuX1dHLAeAVP4K1lQL0867Hrb_mgmXUaRNshXSuX3RfCW8w22If5laMir8RD5Q2opuD-HVfRl5GRbFz5ZS3ET8fM_6VbuWNBhh3omNJgqtYqD5qREYZGywH_i3dTI5TqZsx-hoySAOrsKGeEFKTjwgZccG9mJutc-ocP_nqtU6fzDUw3VTRIeu7C-kRLXjFMszQZ7ywbTl2x_n0eqy7ke98zmutP_UKYcXSE0GEScmx0wUbESl"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-[#012d1d]/90 to-transparent"></div>
             <div className="absolute bottom-0 left-0 p-6">
               <span className="text-[10px] font-black tracking-widest text-emerald-300 uppercase">Top Experience</span>
               <h4 className="text-xl font-bold text-white font-headline">Monteverde Night Walk</h4>
               <p className="text-emerald-50/70 text-sm mt-1">98% customer satisfaction this month.</p>
             </div>
           </div>
-          <div className="bg-primary p-8 rounded-2xl flex flex-col justify-center text-emerald-50">
+          <div className="bg-primary p-8 rounded-2xl flex flex-col justify-center text-on-primary">
             <span className="text-[10px] font-black tracking-widest text-emerald-300 uppercase mb-2">Inventory Alert</span>
             <h4 className="text-xl font-bold font-headline">Low Capacity: Osa Peninsula Safari</h4>
             <p className="text-emerald-100/70 text-sm mt-2 leading-relaxed">Only 4 spots remaining for the next 7 departures. Consider increasing price or opening new slots.</p>

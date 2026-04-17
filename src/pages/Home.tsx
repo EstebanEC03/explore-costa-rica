@@ -48,7 +48,7 @@ export default function Home() {
               className="w-full h-full object-cover"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUWekZf4WOnmd_YKZHG_xhzzo8DmJuPpwp_TmYCuhxVmEqF2oED3Wak3oqKgF5y5ZTlJrcDhIisGMLMEWlDNEnMyNddsi269vwe4qzuaB_xZ4In6VcCKq2Pk4XZI9i-L2ixfEmutsOmvq0DnhD-zSPSVv2MLkXl_uX_uWAteLWl8KJfAqR6mA_dW7j9fb0aj2zFZquNgmFmv-udq4JUqFJdGpsPGZW_po-u5lsWc3vtwe32JjPer7W_d5T4Pks6eAYMxsrt5RDRAOR"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/60 via-primary/20 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-[#012d1d]/60 via-[#012d1d]/20 to-transparent"></div>
           </div>
           <div className="relative z-10 w-full max-w-7xl mx-auto px-8 md:px-12">
             <div className="max-w-2xl">
@@ -59,7 +59,7 @@ export default function Home() {
                 Curated journeys through the heart of the tropics. From volcanic summits to secluded pacific coves, embrace the spirit of Costa Rica.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Link to="/tours" className="px-8 py-4 bg-white text-primary text-sm font-bold rounded-full shadow-xl hover:bg-surface-container-lowest transition-all">
+                <Link to="/tours" className="px-8 py-4 bg-white text-[#012d1d] text-sm font-bold rounded-full shadow-xl hover:bg-surface-container-lowest transition-all">
                   Explore Tours
                 </Link>
               </div>
@@ -127,7 +127,7 @@ export default function Home() {
                       <span className="text-xs text-on-surface-variant block">Starting at</span>
                       <span className="text-lg font-black text-primary">${tour.price}</span>
                     </div>
-                    <span className="px-4 py-2 bg-surface-container-high group-hover:bg-primary group-hover:text-white transition-colors rounded-lg text-xs font-bold">
+                    <span className="px-4 py-2 bg-surface-container-high group-hover:bg-primary group-hover:text-on-primary transition-colors rounded-lg text-xs font-bold">
                       View Details
                     </span>
                   </div>

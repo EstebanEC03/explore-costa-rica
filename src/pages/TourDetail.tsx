@@ -25,7 +25,7 @@ export default function TourDetail() {
         className="relative w-full h-[665px] min-h-[500px] bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuB5UiEiyIs2Zdpk-g7RMm-Bc0GfIzeXTmGlq57PAYCqai_rcZcjw91TknqPjiQoN6GhMoZoOgsy-AAVUm2xsTgKbqhWbm1g--dzccD8Ez847h2libXf_RoB5lA1Buez0rJgZ994jVoLcqqz8J6gzn-vY3Uh4q--yIt27NpsmHN4ntZWLVeJ8dvZJDVGpbjWJtn_AB71HMW_iZys8efcRj2zHaB9WP7zJEfk3DgW6ydC_izJgntNnH7s5eLz9eJnmk5B7-Op7o919tE1')" }}
       >
-        <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#012d1d]/80 via-[#012d1d]/20 to-transparent"></div>
         <div className="absolute bottom-0 left-0 w-full">
           <div className="max-w-[1440px] mx-auto px-6 lg:px-12 pb-16 lg:pb-24">
             <div className="max-w-3xl">

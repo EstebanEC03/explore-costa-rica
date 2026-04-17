@@ -58,7 +58,7 @@ export default function ManageTours() {
               <span className="material-symbols-outlined text-lg">download</span>
               Export CSV
             </button>
-            <button className="bg-gradient-to-br from-primary to-primary-container text-white px-8 py-2.5 rounded-full font-bold text-sm flex items-center gap-2 shadow-lg active:scale-95 transition-transform">
+            <button className="bg-gradient-to-br from-primary to-primary-container text-on-primary px-8 py-2.5 rounded-full font-bold text-sm flex items-center gap-2 shadow-lg active:scale-95 transition-transform">
               <span className="material-symbols-outlined text-lg">add_circle</span>
               Create New Tour
             </button>
@@ -163,7 +163,7 @@ export default function ManageTours() {
             <div>Showing <span className="font-bold text-on-surface">1 - 4</span> of 42 tours</div>
             <div className="flex gap-2">
               <button className="px-3 py-1.5 rounded border border-outline-variant hover:bg-surface-container-highest disabled:opacity-50 transition-colors" disabled>Previous</button>
-              <button className="px-3 py-1.5 rounded border border-outline-variant bg-primary text-white font-bold">1</button>
+              <button className="px-3 py-1.5 rounded border border-outline-variant bg-primary text-on-primary font-bold">1</button>
               <button className="px-3 py-1.5 rounded border border-outline-variant hover:bg-surface-container-highest transition-colors">2</button>
               <button className="px-3 py-1.5 rounded border border-outline-variant hover:bg-surface-container-highest transition-colors">3</button>
               <button className="px-3 py-1.5 rounded border border-outline-variant hover:bg-surface-container-highest transition-colors">Next</button>

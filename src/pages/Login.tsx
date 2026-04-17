@@ -24,7 +24,7 @@ export default function Login() {
           className="w-full h-full object-cover scale-110 blur-sm brightness-95"
           src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlMp4-Q2DL49Vo1L2XKg64GZMylFSRIQGiG4folQinjMN3VSmuIIvqgL-y13RocLCL47Y4f7E62m2eAhEQzF2vDYdvmwDlWjEOWms7FglNCoPstI9xRbjJkOsw7_hDhs6OUczzfL2dei8xmNvos0a6RMdQERTAAQ6DuitgIsxpXLJQDLs1Q7PXcDbthtD65bjQuIOf2vnpTPoF2mq8T7LVBHzj0IUkOjtq--qQ_r-ZghfswYzPt8liZ5UNlNcEwV5p_smyQsnFBpCg"
         />
-        <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-secondary/10"></div>
+        <div className="absolute inset-0 bg-gradient-to-tr from-[#012d1d]/20 via-transparent to-[#006399]/10"></div>
       </div>
 
       {/* Login Container */}

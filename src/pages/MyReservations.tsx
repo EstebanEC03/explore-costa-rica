@@ -95,14 +95,14 @@ export default function MyReservations() {
               </div>
               <div className="w-full md:w-auto pt-4 md:pt-0 border-t md:border-t-0 border-outline-variant/10 flex md:flex-col items-center gap-4">
                 {res.status === 'upcoming' && (
-                  <Link to={`/tours/${res.id}`} className="w-full md:w-auto text-center px-6 py-2.5 bg-gradient-to-br from-primary to-primary-container text-white rounded-full font-semibold text-sm hover:scale-[1.02] active:scale-95 transition-transform">
+                  <Link to={`/tours/${res.id}`} className="w-full md:w-auto text-center px-6 py-2.5 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-full font-semibold text-sm hover:scale-[1.02] active:scale-95 transition-transform">
                     View Details
                   </Link>
                 )}
                 {res.status === 'completed' && (
                   <>
                     <a className="text-secondary font-semibold text-sm hover:underline" href="#">View Receipt</a>
-                    <Link to="/tours" className="w-full md:w-auto text-center px-6 py-2.5 bg-secondary-container text-on-secondary-container rounded-full font-semibold text-sm hover:bg-secondary hover:text-white transition-colors">
+                    <Link to="/tours" className="w-full md:w-auto text-center px-6 py-2.5 bg-secondary-container text-on-secondary-container rounded-full font-semibold text-sm hover:bg-secondary hover:text-on-secondary transition-colors">
                       Rebook Tour
                     </Link>
                   </>

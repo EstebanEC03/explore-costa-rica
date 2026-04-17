@@ -9,7 +9,7 @@ const notifications = [
     time: '2 mins ago',
     ref: 'Ref: #CR-2049',
     icon: 'calendar_month',
-    iconBg: 'bg-primary text-white',
+    iconBg: 'bg-primary text-on-primary',
     isNew: true,
     filled: true,
   },
@@ -126,13 +126,13 @@ export default function Notifications() {
           ))}
 
           {/* Action Card */}
-          <div className="mt-8 p-8 rounded-3xl bg-primary text-white flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
+          <div className="mt-8 p-8 rounded-3xl bg-primary text-on-primary flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-48 h-48 bg-tertiary-container/20 rounded-full -mr-24 -mt-24 blur-3xl"></div>
             <div className="relative z-10 space-y-2 text-center md:text-left">
               <h4 className="text-2xl font-bold font-headline">Never miss an update</h4>
-              <p className="text-on-primary-container text-sm">Enable push notifications on your mobile device for real-time tour updates.</p>
+              <p className="text-on-primary/80 text-sm">Enable push notifications on your mobile device for real-time tour updates.</p>
             </div>
-            <button className="relative z-10 bg-white text-primary px-8 py-3 rounded-full font-bold hover:bg-emerald-50 transition-colors shadow-lg shadow-black/10">
+            <button className="relative z-10 bg-surface-container-lowest text-primary px-8 py-3 rounded-full font-bold hover:bg-surface transition-colors shadow-lg shadow-black/10">
               Enable Now
             </button>
           </div>
