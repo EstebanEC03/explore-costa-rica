@@ -26,6 +26,9 @@ export default function Registration() {
 
       <main className="relative z-10 w-full max-w-[480px] px-6 py-12">
         <div className="flex flex-col items-center mb-10">
+          <div className="bg-primary p-3 rounded-xl mb-4 shadow-lg flex items-center justify-center">
+            <img src="/favicon.svg" alt="Explore Costa Rica Logo" className="w-8 h-8" />
+          </div>
           <h1 className="font-headline text-3xl font-extrabold tracking-tighter text-primary dark:text-white mb-2">Explore Costa Rica Tours</h1>
           <p className="text-on-surface-variant dark:text-white font-medium">Begin your curated tropical journey</p>
         </div>
