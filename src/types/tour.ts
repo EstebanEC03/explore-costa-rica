@@ -30,7 +30,13 @@ export interface TourFormData {
 export interface TourFilters {
   search?: string;
   category?: string;
-  minPrice?: number;
-  maxPrice?: number;
   location?: string;
+  page?: number;
+  pageSize?: number;
+}
+
+export interface TourCategory {
+  id: string;
+  name: string;
+  count: number;
 }
