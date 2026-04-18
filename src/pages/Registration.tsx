@@ -1,20 +1,52 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 export default function Registration() {
   const [formData, setFormData] = useState({ name: '', email: '', password: '', confirmPassword: '' });
+  const [error, setError] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+
+  const { register } = useAuth();
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const validate = (): string | null => {
+    if (!formData.name.trim()) return 'Please enter your full name.';
+    if (!formData.email.trim()) return 'Please enter your email.';
+    if (!/\S+@\S+\.\S+/.test(formData.email)) return 'Please enter a valid email address.';
+    if (formData.password.length < 8) return 'Password must be at least 8 characters long.';
+    if (formData.password !== formData.confirmPassword) return 'Passwords do not match.';
+    return null;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
+
+    const validationError = validate();
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      await register(formData);
+      navigate('/', { replace: true });
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Unable to register. Please try again.';
+      setError(message);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
     <div className="bg-background min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
-      {/* Background */}
       <div className="absolute inset-0 z-0">
         <img
           alt="Tropical Background"
@@ -34,48 +66,60 @@ export default function Registration() {
         </div>
 
         <div className="glass-panel dark:!bg-white/70 dark:text-black rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.06)] p-8 md:p-10">
-          <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
+          <form className="flex flex-col gap-6" onSubmit={handleSubmit} noValidate>
+            {error && (
+              <div className="bg-error-container/40 rounded-lg p-4 flex items-start gap-3 border border-error/10" role="alert">
+                <span className="material-symbols-outlined text-error text-xl">error</span>
+                <p className="text-on-error-container text-xs font-medium leading-relaxed">{error}</p>
+              </div>
+            )}
+
             <div className="flex flex-col gap-2">
               <label className="text-sm font-semibold text-primary/80 dark:text-black px-1" htmlFor="full_name">Full Name</label>
               <input
-                className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3.5 text-on-surface focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-highest transition-all duration-300 outline-none"
+                className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3.5 text-on-surface focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-highest transition-all duration-300 outline-none disabled:opacity-60"
                 id="full_name"
                 name="name"
                 placeholder="Juan Costa"
                 type="text"
                 value={formData.name}
                 onChange={handleChange}
+                disabled={submitting}
+                autoComplete="name"
+                required
               />
             </div>
 
             <div className="flex flex-col gap-2">
               <label className="text-sm font-semibold text-primary/80 dark:text-black px-1" htmlFor="reg_email">Email</label>
               <input
-                className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3.5 text-on-surface focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-highest transition-all duration-300 outline-none"
+                className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3.5 text-on-surface focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-highest transition-all duration-300 outline-none disabled:opacity-60"
                 id="reg_email"
                 name="email"
                 type="email"
                 placeholder="wanderer@puravida.com"
                 value={formData.email}
                 onChange={handleChange}
+                disabled={submitting}
+                autoComplete="email"
+                required
               />
-              <div className="flex items-center gap-1.5 px-1 mt-1">
-                <span className="material-symbols-outlined text-[16px] text-secondary">info</span>
-                <span className="text-xs text-secondary font-medium italic">Please enter a valid travel contact email.</span>
-              </div>
             </div>
 
             <div className="flex flex-col gap-2">
               <label className="text-sm font-semibold text-primary/80 dark:text-black px-1" htmlFor="reg_password">Password</label>
               <div className="relative group">
                 <input
-                  className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3.5 text-on-surface focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-highest transition-all duration-300 outline-none"
+                  className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3.5 text-on-surface focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-highest transition-all duration-300 outline-none disabled:opacity-60"
                   id="reg_password"
                   name="password"
                   type="password"
-                  placeholder="••••••••••••"
+                  placeholder="At least 8 characters"
                   value={formData.password}
                   onChange={handleChange}
+                  disabled={submitting}
+                  autoComplete="new-password"
+                  required
                 />
                 {formData.password.length >= 8 && (
                   <div className="absolute right-4 top-1/2 -translate-y-1/2">
@@ -83,29 +127,44 @@ export default function Registration() {
                   </div>
                 )}
               </div>
-              {formData.password.length >= 8 && (
-                <div className="flex items-center gap-1.5 px-1 mt-1">
-                  <span className="text-xs text-on-surface-variant">Strong security detected.</span>
-                </div>
+              {formData.password.length > 0 && formData.password.length < 8 && (
+                <span className="text-xs text-error px-1">Password must be at least 8 characters.</span>
               )}
             </div>
 
             <div className="flex flex-col gap-2">
               <label className="text-sm font-semibold text-primary/80 dark:text-black px-1" htmlFor="confirm_password">Confirm Password</label>
               <input
-                className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3.5 text-on-surface focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-highest transition-all duration-300 outline-none"
+                className="w-full bg-surface-container-high border-none rounded-lg px-4 py-3.5 text-on-surface focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-highest transition-all duration-300 outline-none disabled:opacity-60"
                 id="confirm_password"
                 name="confirmPassword"
                 type="password"
-                placeholder="••••••••••••"
+                placeholder="Re-enter your password"
                 value={formData.confirmPassword}
                 onChange={handleChange}
+                disabled={submitting}
+                autoComplete="new-password"
+                required
               />
+              {formData.confirmPassword.length > 0 && formData.password !== formData.confirmPassword && (
+                <span className="text-xs text-error px-1">Passwords do not match.</span>
+              )}
             </div>
 
             <div className="flex flex-col gap-4 mt-2">
-              <button className="w-full py-4 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 active:scale-95" type="submit">
-                Register
+              <button
+                className="w-full py-4 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                type="submit"
+                disabled={submitting}
+              >
+                {submitting ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-on-primary/30 border-t-on-primary rounded-full animate-spin" />
+                    Creating Account...
+                  </>
+                ) : (
+                  'Register'
+                )}
               </button>
               <div className="text-center">
                 <Link className="text-secondary dark:text-blue-600 font-semibold hover:underline transition-all text-sm" to="/login">Already have an account? Sign In</Link>
@@ -123,31 +182,7 @@ export default function Registration() {
             </p>
           </div>
         </div>
-
-        <div className="mt-12 flex justify-center items-center gap-4 opacity-60">
-          <div className="flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-primary">
-            <span className="material-symbols-outlined text-[18px]">eco</span>
-            Sustainability First
-          </div>
-          <div className="w-1 h-1 bg-outline-variant rounded-full"></div>
-          <div className="flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-primary">
-            <span className="material-symbols-outlined text-[18px]">verified_user</span>
-            Secure Access
-          </div>
-        </div>
       </main>
-
-      <footer className="w-full mt-auto bg-emerald-50 py-8 px-12">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="text-lg font-bold text-emerald-900 font-headline">Explore Costa Rica Tours</div>
-          <div className="flex gap-8">
-            <a className="text-emerald-700/60 hover:text-emerald-900 transition-colors text-sm" href="#">Privacy Policy</a>
-            <a className="text-emerald-700/60 hover:text-emerald-900 transition-colors text-sm" href="#">Terms of Service</a>
-            <a className="text-emerald-700/60 hover:text-emerald-900 transition-colors text-sm" href="#">Travel Insurance</a>
-          </div>
-          <div className="text-emerald-700/60 text-sm">&copy; 2024 Explore Costa Rica Tours. Pura Vida.</div>
-        </div>
-      </footer>
     </div>
   );
 }

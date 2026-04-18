@@ -82,7 +82,8 @@ export function useTourDetail(id: string | undefined) {
       try {
         const response = await toursService.getTourById(id);
         if (cancelled) return;
-        setTour(response.data);
+        const payload = (response as { data?: Tour }).data ?? (response as unknown as Tour);
+        setTour(payload ?? null);
       } catch (err) {
         if (cancelled) return;
         const apiError = err as ApiError;

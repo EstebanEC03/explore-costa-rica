@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
+import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './components/shared/ProtectedRoute';
 
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -10,23 +12,67 @@ import MyReservations from './pages/MyReservations';
 import Notifications from './pages/Notifications';
 import AdminDashboard from './pages/AdminDashboard';
 import ManageTours from './pages/ManageTours';
+import ManageUsers from './pages/ManageUsers';
 
 export default function App() {
   return (
     <ThemeProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Registration />} />
-          <Route path="/tours" element={<ToursList />} />
-          <Route path="/tours/:id" element={<TourDetail />} />
-          <Route path="/my-reservations" element={<MyReservations />} />
-          <Route path="/notifications" element={<Notifications />} />
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/admin/tours" element={<ManageTours />} />
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
+            {/* Rutas públicas */}
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Registration />} />
+            <Route path="/tours" element={<ToursList />} />
+            <Route path="/tours/:id" element={<TourDetail />} />
+
+            {/* Rutas que requieren autenticación */}
+            <Route
+              path="/my-reservations"
+              element={
+                <ProtectedRoute>
+                  <MyReservations />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/notifications"
+              element={
+                <ProtectedRoute>
+                  <Notifications />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* Rutas de administrador */}
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute requireAdmin>
+                  <AdminDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/tours"
+              element={
+                <ProtectedRoute requireAdmin>
+                  <ManageTours />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/users"
+              element={
+                <ProtectedRoute requireAdmin>
+                  <ManageUsers />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </ThemeProvider>
   );
 }

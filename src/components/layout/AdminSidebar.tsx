@@ -4,7 +4,7 @@ const navItems = [
   { icon: 'dashboard', label: 'Dashboard', path: '/admin' },
   { icon: 'calendar_month', label: 'Bookings', path: '#' },
   { icon: 'map', label: 'Tour Inventory', path: '/admin/tours' },
-  { icon: 'group', label: 'Customer CRM', path: '#' },
+  { icon: 'group', label: 'Customer CRM', path: '/admin/users' },
   { icon: 'insights', label: 'Analytics', path: '#' },
   { icon: 'settings', label: 'Settings', path: '#' },
 ];

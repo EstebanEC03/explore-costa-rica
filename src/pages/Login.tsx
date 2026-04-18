@@ -1,23 +1,47 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+
+interface LocationState {
+  from?: { pathname: string };
+}
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const state = location.state as LocationState | null;
+  const redirectTo = state?.from?.pathname || '/';
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !password) {
-      setError('Invalid credentials. Please verify your email and password and try again.');
+    setError('');
+
+    if (!email.trim() || !password) {
+      setError('Please enter both email and password.');
       return;
     }
-    setError('');
+
+    setSubmitting(true);
+    try {
+      await login({ email: email.trim(), password });
+      navigate(redirectTo, { replace: true });
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Invalid credentials. Please try again.';
+      setError(message);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
     <div className="bg-background min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Background */}
       <div className="absolute inset-0 z-0">
         <img
           alt="Tropical Background"
@@ -27,10 +51,8 @@ export default function Login() {
         <div className="absolute inset-0 bg-gradient-to-tr from-[#012d1d]/20 via-transparent to-[#006399]/10"></div>
       </div>
 
-      {/* Login Container */}
       <main className="relative z-10 w-full max-w-[460px]">
         <div className="glass-panel rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.12)] p-10 md:p-12">
-          {/* Branding */}
           <div className="flex flex-col items-center mb-10">
             <div className="bg-primary p-3 rounded-xl mb-4 shadow-lg">
               <span className="material-symbols-outlined text-on-primary text-3xl">nature_people</span>
@@ -39,10 +61,9 @@ export default function Login() {
             <p className="text-on-surface-variant text-sm mt-1">Begin your curated journey</p>
           </div>
 
-          {/* Form */}
-          <form className="space-y-6" onSubmit={handleSubmit}>
+          <form className="space-y-6" onSubmit={handleSubmit} noValidate>
             {error && (
-              <div className="bg-error-container/40 rounded-lg p-4 flex items-start gap-3 border border-error/10">
+              <div className="bg-error-container/40 rounded-lg p-4 flex items-start gap-3 border border-error/10" role="alert">
                 <span className="material-symbols-outlined text-error text-xl">error</span>
                 <p className="text-on-error-container text-xs font-medium leading-relaxed">{error}</p>
               </div>
@@ -53,12 +74,15 @@ export default function Login() {
                 <div className="relative group">
                   <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant/60 group-focus-within:text-primary transition-colors">mail</span>
                   <input
-                    className="w-full pl-12 pr-4 py-4 bg-surface-container-high border-none rounded-xl focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-highest transition-all text-on-surface placeholder:text-on-surface-variant/40"
+                    className="w-full pl-12 pr-4 py-4 bg-surface-container-high border-none rounded-xl focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-highest transition-all text-on-surface placeholder:text-on-surface-variant/40 disabled:opacity-60"
                     id="email"
                     type="email"
                     placeholder="curator@pura-vida.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    disabled={submitting}
+                    autoComplete="email"
+                    required
                   />
                 </div>
               </div>
@@ -67,12 +91,15 @@ export default function Login() {
                 <div className="relative group">
                   <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant/60 group-focus-within:text-primary transition-colors">lock</span>
                   <input
-                    className="w-full pl-12 pr-4 py-4 bg-surface-container-high border-none rounded-xl focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-highest transition-all text-on-surface placeholder:text-on-surface-variant/40"
+                    className="w-full pl-12 pr-4 py-4 bg-surface-container-high border-none rounded-xl focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-highest transition-all text-on-surface placeholder:text-on-surface-variant/40 disabled:opacity-60"
                     id="password"
                     type="password"
                     placeholder="••••••••"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    disabled={submitting}
+                    autoComplete="current-password"
+                    required
                   />
                 </div>
               </div>
@@ -86,8 +113,19 @@ export default function Login() {
               <a className="text-sm font-semibold text-secondary hover:underline underline-offset-4 decoration-secondary/30 transition-all" href="#">Forgot Password?</a>
             </div>
 
-            <button className="w-full py-4 bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold rounded-full shadow-lg hover:shadow-xl active:scale-[0.98] transition-all duration-300" type="submit">
-              Sign In
+            <button
+              className="w-full py-4 bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold rounded-full shadow-lg hover:shadow-xl active:scale-[0.98] transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              type="submit"
+              disabled={submitting}
+            >
+              {submitting ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-on-primary/30 border-t-on-primary rounded-full animate-spin" />
+                  Signing In...
+                </>
+              ) : (
+                'Sign In'
+              )}
             </button>
           </form>
 
